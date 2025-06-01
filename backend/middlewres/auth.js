@@ -9,12 +9,8 @@ const auth = (req, res, next) => {
         }
 
         const decoded = verifyToken(token);
-        if (decoded.role === "User") {
             req.user = decoded;
             next();
-        } else {
-            throw new CustomError("Unauthorized access", 403);
-        }
     } catch (error) {
         next(new CustomError(error.message || "Authentication failed", 401));
     }
